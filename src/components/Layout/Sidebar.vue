@@ -1,40 +1,21 @@
 <template>
   <div class="sidebar" :class="{'collapsed-sidebar': isCollapsed}">
     <div class="logo-box">{{ isCollapsed ? 'admin' : 'blog-admin' }}</div>
-    <Menu theme="dark" accordion width="auto" :class="{'collapsed-menu': isCollapsed}">
-      <Submenu name="1">
+    <Menu theme="dark" accordion :active-name="$route.path" width="auto" :class="{'collapsed-menu': isCollapsed}">
+      <Submenu v-for="(item, index) in menus" :key="index" :name="item.path">
         <template slot="title" v-if="isCollapsed">
           <Poptip trigger="hover" placement="right" popper-class="collapsed-popper" padding="8px 0">
-            <div class="collapsed-icon flex-wrap flex-x-center flex-y-center"><Icon type="ios-paper"/></div>
+            <div class="collapsed-icon flex-wrap flex-x-center flex-y-center"><Icon :type="item.meta.icon"/></div>
             <ul slot="content" class="menu-items">
-              <li>文章管理</li>
-              <li>文章管理</li>
+              <li v-for="(menu, i) in item.children" :key="i" :class="{'active': $route.path === `${item.path}/${menu.path}`}"><router-link :to="`${item.path}/${menu.path}`">{{ menu.meta.title }}</router-link></li>
             </ul>
           </Poptip>
         </template>
         <template slot="title" v-else>
-          <Icon type="ios-paper"/>
-          <span class="menu-title">内容管理</span>
+          <Icon :type="item.meta.icon"/>
+          <span class="menu-title">{{ item.meta.title }}</span>
         </template>
-        <MenuItem name="1-1">文章管理</MenuItem>
-        <MenuItem name="1-2">标签管理</MenuItem>
-      </Submenu>
-      <Submenu name="2">
-        <template slot="title" v-if="isCollapsed">
-          <Poptip trigger="hover" placement="right" popper-class="collapsed-popper" padding="8px 0">
-            <div class="collapsed-icon flex-wrap flex-x-center flex-y-center"><Icon type="ios-paper"/></div>
-            <ul slot="content" class="menu-items">
-              <li>文章管理</li>
-              <li>文章管理</li>
-            </ul>
-          </Poptip>
-        </template>
-        <template slot="title" v-else>
-          <Icon type="ios-paper"/>
-          <span class="menu-title">内容管理</span>
-        </template>
-        <MenuItem name="2-1">文章管理</MenuItem>
-        <MenuItem name="2-2">标签管理</MenuItem>
+        <MenuItem v-for="(menu, i) in item.children" :key="i" :name="`${item.path}/${menu.path}`" :to="`${item.path}/${menu.path}`">{{ menu.meta.title }}</MenuItem>
       </Submenu>
     </Menu>
   </div>
@@ -49,7 +30,8 @@ export default {
     }
   },
   computed: mapState([
-    'isCollapsed'
+    'isCollapsed',
+    'menus'
   ]),
   methods: {
   },
@@ -91,11 +73,19 @@ export default {
     height: 60px;
   }
   .menu-items li {
-    line-height: 28px;
-    color: rgba(255,255,255,.7);
+    line-height: 30px;
     padding: 0 8px;
   }
-  .menu-items li:hover {
+  .menu-items li a {
+    color: rgba(255,255,255,.7);
+  }
+  .menu-items li:hover a {
+    color: #fff;
+  }
+  .menu-items li.active {
+    background-color: #2d8cf0;
+  }
+  .menu-items li.active a {
     color: #fff;
   }
 </style>
