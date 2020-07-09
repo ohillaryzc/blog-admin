@@ -1,7 +1,15 @@
 <template>
   <div class="nav-bar" :class="{'collapsed-nav-bar': isCollapsed}">
-    <div class="top-item left-util" @click="collapsedSide">
+    <div class="top-item left-util hover" @click="collapsedSide">
       <Icon type="md-reorder" size="24" class="collapsed-icon"/>
+    </div>
+    <div class="top-item left-util">
+      <Breadcrumb>
+        <BreadcrumbItem to="/">首页</BreadcrumbItem>
+        <template v-for="(item, index) in titles">
+          <BreadcrumbItem :key="index" v-if="item">{{ item }}</BreadcrumbItem>
+        </template>
+      </Breadcrumb>
     </div>
     <div class="top-item right-util"></div>
   </div>
@@ -15,7 +23,8 @@ export default {
     return {}
   },
   computed: mapState([
-    'isCollapsed'
+    'isCollapsed',
+    'titles'
   ]),
   methods: {
     collapsedSide () {
@@ -48,12 +57,14 @@ export default {
     transition: all .3s ease-in-out;
   }
   .top-item {
+    display: flex;
+    align-items: center;
     height: 100%;
     line-height: 60px;
     padding: 0 6px;
     cursor: pointer;
   }
-  .top-item:hover {
+  .top-item.hover:hover {
     background-color: #f8f8f9;
   }
   .top-item.left-util {

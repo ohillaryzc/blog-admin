@@ -1,6 +1,7 @@
 /* 工具方法 */
 /**
- * @param arr
+ * @param {Array} arr 一个router结构的数组
+ * @returns {Array}
  * */
 function getRouterMap (arr) {
   const result = []

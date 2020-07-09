@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isCollapsed: false,
-    menus: []
+    menus: [],
+    titles: []
   },
   mutations: {
     setCollapsed (state) {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     setMenus (state, menus) {
       state.menus = menus
+    },
+    setTitles (state, titles) {
+      state.titles = titles
     }
   },
   actions: {
