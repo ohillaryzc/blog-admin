@@ -75,6 +75,16 @@
     -webkit-align-items: stretch;
     -webkit-box-align: stretch;
 }
+/* flex布局end */
+
+/* 全局样式 */
+.content-page {
+    margin: 16px;
+    padding: 24px;
+    background-color: #fff;
+}
+/* 全局样式end */
+
 /* iview样式覆盖 */
 .ivu-menu-dark {
     background-color: #191a23;
@@ -91,6 +101,9 @@
 }
 .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title {
     white-space: nowrap;
+}
+.ivu-table th {
+    background-color: #fff;
 }
 /* 侧边栏样式重组start */
 .collapsed-menu .ivu-menu-submenu-title-icon {

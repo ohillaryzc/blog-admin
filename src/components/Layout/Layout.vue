@@ -34,6 +34,7 @@ export default {
     height: 100vh;
     padding: 60px 0 0 240px;
     transition: padding .3s ease-in-out;
+    background-color: #f7f7f7;
   }
   .router-content.collapsed-content {
     padding-left: 78px;

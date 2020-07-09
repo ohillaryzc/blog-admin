@@ -4,17 +4,17 @@ import { Message, LoadingBar } from 'view-design'
 
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
-function myPost ({ url, params }) {
+export function myPost ({ url, params }) {
   return new Promise((resolve, reject) => {
     LoadingBar.start()
     axios.post(url, params)
       .then(res => {
-        if (res.data.status === 0) {
+        if (res.data.status === 0 || !res.data.error) {
           LoadingBar.finish()
           resolve(res.data)
         } else {
           LoadingBar.error()
-          Message.error(res.data.message)
+          Message.error(res.data.message || '请求错误，稍后重试！')
           reject(res.data)
         }
       })
@@ -24,8 +24,4 @@ function myPost ({ url, params }) {
         reject()
       })
   })
-}
-
-export {
-  myPost
 }

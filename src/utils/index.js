@@ -3,7 +3,7 @@
  * @param {Array} arr 一个router结构的数组
  * @returns {Array}
  * */
-function getRouterMap (arr) {
+export function getRouterMap (arr) {
   const result = []
   arr.forEach(item => {
     if (!item.hidden) {
@@ -17,6 +17,16 @@ function getRouterMap (arr) {
   return result
 }
 
-export {
-  getRouterMap
+/**
+ * 传入一个数组，返回一个带特殊标识的数组
+ * @param {Array} source
+ * @param {string} key
+ * @return {Array} result
+ * */
+export function getKeyArray (source, key) {
+  const result = []
+  source.forEach(item => {
+    result[key + item[key]] = item
+  })
+  return result
 }
