@@ -8,7 +8,7 @@
       <div class="form-box">
         <Form :model="visitorForm" :label-width="0" v-if="isVisitor">
           <FormItem prop="password">
-            <Input v-model="visitorForm.password" size="large" prefix="md-lock" placeholder="请输入游客码"/>
+            <Input type="password" v-model="visitorForm.password" size="large" prefix="md-lock" placeholder="请输入游客码"/>
           </FormItem>
         </Form>
         <Form :model="loginForm" :label-width="0" v-else>
@@ -26,7 +26,7 @@
             <span>{{ isVisitor ? '管理登录' : '游客登录' }}</span>
           </div>
         </div>
-        <Button type="primary" size="large" long>进入</Button>
+        <Button type="primary" size="large" long @click="toLogin" :loading="loading">进入</Button>
       </div>
     </div>
     <div class="copy-box">
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { visitorLogin } from '../api'
 export default {
   name: "login",
   data () {
@@ -53,8 +54,28 @@ export default {
         password: ''
       },
       keep: false,
-      isVisitor: false
+      isVisitor: true,
+      loading: false
     }
+  },
+  methods: {
+    toLogin () {
+      this.loading = true
+      if (this.isVisitor) {
+        this.toVisitorLogin()
+      } else {
+        this.toAdminLogin()
+      }
+    },
+    toVisitorLogin () {
+      visitorLogin(this.visitorForm).then(data => {
+        console.log(data)
+      }, err => {
+        console.log(err)
+        this.loading = false
+      })
+    },
+    toAdminLogin () {}
   }
 }
 </script>
