@@ -31,7 +31,7 @@ export default {
 
 <style scoped>
   .router-content {
-    height: calc(100vh - 60px);
+    height: 100vh;
     padding: 60px 0 0 240px;
     transition: padding .3s ease-in-out;
   }

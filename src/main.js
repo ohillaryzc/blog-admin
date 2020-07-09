@@ -4,11 +4,11 @@ import router from './router'
 import { syncRoutesMap } from './router'
 import store from './store'
 import { getRouterMap } from './utils'
-import { Button, Icon, Menu, Submenu, MenuItem, Poptip, Breadcrumb, BreadcrumbItem } from 'view-design'
+import { Button, Icon, Menu, Submenu, MenuItem, Poptip, Breadcrumb, BreadcrumbItem, Form, FormItem, Input, Checkbox } from 'view-design'
 import 'view-design/dist/styles/iview.css'
 import './assets/css/cover.css'
 
-const iViewComponents = { Button, Icon, Menu, Submenu, MenuItem, Poptip, Breadcrumb, BreadcrumbItem }
+const iViewComponents = { Button, Icon, Menu, Submenu, MenuItem, Poptip, Breadcrumb, BreadcrumbItem, Form, FormItem, Input, Checkbox }
 Object.keys(iViewComponents).forEach(key => {
   Vue.component(key, iViewComponents[key])
 })
