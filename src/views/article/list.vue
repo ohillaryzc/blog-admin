@@ -1,6 +1,17 @@
 <template>
   <div class="article-list-page content-page">
-    <Table :columns="col" :data="list">
+    <search :options="searchConfig"></search>
+    <div class="batch-button-group">
+      <Button type="primary" icon="md-add" style="margin-right: 12px;">新建</Button>
+      <Dropdown placement="bottom-start" v-show="checked.length">
+        <Button>批量操作<Icon type="ios-arrow-down"/></Button>
+        <DropdownMenu slot="list">
+          <DropdownItem>隐藏（删除）</DropdownItem>
+          <DropdownItem>隐藏（删除）</DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+    </div>
+    <Table :columns="col" :data="list" @on-selection-change="tableSelect">
       <template slot-scope="{ row }" slot="title">
         <span>{{ row.id + ':' + row.title }}</span>
       </template>
@@ -32,11 +43,19 @@
 <script>
 import { getArticleList, getClassify, getTags } from '../../api'
 import { getKeyArray } from '../../utils'
+import search from '../../components/search'
 export default {
   name: "list",
+  components: {
+    search
+  },
   data () {
     return {
       col: [
+        {
+          type: 'selection',
+          width: 60
+        },
         {
           title: '标题',
           slot: 'title'
@@ -75,10 +94,19 @@ export default {
       classify: null,
       tags: null,
       page: {
-        pageSize: 15,
+        pageSize: 10,
         currentPage: 1,
         total: 0
-      }
+      },
+      searchConfig: [
+        { type: 'input', key: 'title', label: '文章标题', placeholder: '请输入标题' },
+        { type: 'select', option: [{ label: '原创', value: 0 }, { label: '其他', value: 1 }], key: 'type', label: '来源', placeholder: '请选择来源' },
+        { type: 'date', key: 'start', label: '发布时间', placeholder: '请选择时间' },
+        { type: 'daterange', key: 'times', label: '发布时间区', width: 90, placeholder: '请选择时间' },
+        { type: 'select', multiple: true, option: [{ label: 'vue', value: 0 }, { label: 'node', value: 1 }], key: 'tags', label: '标签', placeholder: '请选择标签' },
+        { type: 'checkbox', key: 'delete', title: '显示已删除' }
+      ],
+      checked: []
     }
   },
   methods: {
@@ -110,6 +138,9 @@ export default {
         })
       })
       this.list = list
+    },
+    tableSelect (selection) {
+      this.checked = selection
     }
   },
   mounted() {
@@ -122,5 +153,8 @@ export default {
   .page-box {
     text-align: center;
     margin-top: 24px;
+  }
+  .batch-button-group {
+    margin: 12px 0;
   }
 </style>
