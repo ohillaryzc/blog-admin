@@ -4,9 +4,11 @@ import router from './router'
 import { syncRoutesMap } from './router'
 import store from './store'
 import { getRouterMap } from './utils'
+import markdown from 'mavon-editor'
 import { Button, Icon, Menu, Submenu, MenuItem, Poptip, Breadcrumb, BreadcrumbItem, Form, FormItem, Input, Select, Option, DatePicker, Checkbox, Table, Tag, Page, Dropdown, DropdownItem, DropdownMenu } from 'view-design'
 import 'view-design/dist/styles/iview.css'
 import './assets/css/cover.css'
+import 'mavon-editor/dist/css/index.css'
 
 const iViewComponents = { Button, Icon, Menu, Submenu, MenuItem, Poptip, Breadcrumb, BreadcrumbItem, Form, FormItem, Input, Select, Option, DatePicker, Checkbox, Table, Tag, Page, Dropdown, DropdownItem, DropdownMenu }
 Object.keys(iViewComponents).forEach(key => {
@@ -24,6 +26,8 @@ router.beforeEach((to, from, next) => {
   store.commit('setTitles', titles)
   next()
 })
+
+Vue.use(markdown)
 
 Vue.config.productionTip = false
 

@@ -31,9 +31,9 @@ export default {
 
 <style scoped>
   .router-content {
-    height: 100vh;
     padding: 60px 0 0 240px;
     transition: padding .3s ease-in-out;
+    border: 1px solid #f7f7f7;
     background-color: #f7f7f7;
   }
   .router-content.collapsed-content {
