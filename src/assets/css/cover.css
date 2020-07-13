@@ -105,6 +105,9 @@
 .ivu-table th {
     background-color: #fff;
 }
+.ivu-tag {
+    cursor: pointer;
+}
 /* 侧边栏样式重组start */
 .collapsed-menu .ivu-menu-submenu-title-icon {
     display: none;

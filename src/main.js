@@ -5,12 +5,12 @@ import { syncRoutesMap } from './router'
 import store from './store'
 import { getRouterMap } from './utils'
 import markdown from 'mavon-editor'
-import { Button, Icon, Menu, Submenu, MenuItem, Poptip, Breadcrumb, BreadcrumbItem, Form, FormItem, Input, Select, Option, DatePicker, Checkbox, Table, Tag, Page, Dropdown, DropdownItem, DropdownMenu } from 'view-design'
+import { Button, Icon, Menu, Submenu, MenuItem, Poptip, Breadcrumb, BreadcrumbItem, Form, FormItem, Input, Select, Option, DatePicker, Checkbox, Table, Tag, Page, Dropdown, DropdownItem, DropdownMenu, Upload } from 'view-design'
 import 'view-design/dist/styles/iview.css'
 import './assets/css/cover.css'
 import 'mavon-editor/dist/css/index.css'
 
-const iViewComponents = { Button, Icon, Menu, Submenu, MenuItem, Poptip, Breadcrumb, BreadcrumbItem, Form, FormItem, Input, Select, Option, DatePicker, Checkbox, Table, Tag, Page, Dropdown, DropdownItem, DropdownMenu }
+const iViewComponents = { Button, Icon, Menu, Submenu, MenuItem, Poptip, Breadcrumb, BreadcrumbItem, Form, FormItem, Input, Select, Option, DatePicker, Checkbox, Table, Tag, Page, Dropdown, DropdownItem, DropdownMenu, Upload }
 Object.keys(iViewComponents).forEach(key => {
   Vue.component(key, iViewComponents[key])
 })

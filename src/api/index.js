@@ -44,3 +44,14 @@ export function getTags (params) {
     params: params || {}
   })
 }
+
+/**
+ * 发布文章
+ * @param {Object} params
+ * */
+export function publishArticle (params) {
+  return myPost({
+    url: '/add/article',
+    params
+  })
+}
