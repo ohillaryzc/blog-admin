@@ -11,7 +11,7 @@ export function myPost ({ url, params }) {
       .then(res => {
         if (res.data.status === 0 || !res.data.error) {
           LoadingBar.finish()
-          resolve(res.data)
+          resolve(res.data.data)
         } else {
           LoadingBar.error()
           Message.error(res.data.message || '请求错误，稍后重试！')

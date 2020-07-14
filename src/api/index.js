@@ -13,6 +13,15 @@ export function visitorLogin (params) {
 }
 
 /**
+ * 通过token判断有没有过期
+ * */
+export function tokenLogin () {
+  return myPost({
+    url: '/token/login'
+  })
+}
+
+/**
  * 获取文章列表
  * @param {Object} [params]
  * */

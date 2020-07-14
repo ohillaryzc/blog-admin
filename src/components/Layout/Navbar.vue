@@ -11,7 +11,17 @@
         </template>
       </Breadcrumb>
     </div>
-    <div class="top-item right-util"></div>
+    <div class="top-item right-util">
+      <Poptip placement="bottom" width="150" trigger="hover" v-model="showUserMenu">
+        <div class="user-box">
+          <Avatar icon="ios-person"/>
+          <span>{{ user.name }}</span>
+        </div>
+        <div slot="content" @click="showUserMenu = false">
+          菜单
+        </div>
+      </Poptip>
+    </div>
   </div>
 </template>
 
@@ -20,11 +30,14 @@ import { mapState } from 'vuex'
 export default {
   name: "Navbar",
   data () {
-    return {}
+    return {
+      showUserMenu: false
+    }
   },
   computed: mapState([
     'isCollapsed',
-    'titles'
+    'titles',
+    'user'
   ]),
   methods: {
     collapsedSide () {

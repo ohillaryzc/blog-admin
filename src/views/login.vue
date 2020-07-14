@@ -69,13 +69,15 @@ export default {
     },
     toVisitorLogin () {
       visitorLogin(this.visitorForm).then(data => {
-        console.log(data)
-      }, err => {
-        console.log(err)
+        this.$store.commit('setUser', data)
+        this.$router.push('/')
+      }, () => {
         this.loading = false
       })
     },
     toAdminLogin () {}
+  },
+  created () {
   }
 }
 </script>
