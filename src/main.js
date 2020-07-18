@@ -20,6 +20,9 @@ Object.keys(iViewComponents).forEach(key => {
 const menus = getRouterMap(syncRoutesMap)
 store.commit('setMenus', menus)
 router.beforeEach((to, from, next) => {
+  // if (store.user) {
+  //
+  // }
   const titles = [
     to.matched[0].meta.title,
     to.meta.title
@@ -29,15 +32,8 @@ router.beforeEach((to, from, next) => {
 })
 
 // 获取用户信息，保存在vuex
-// const asyncLogin = async function () {
-//   return await tokenLogin()
-// }
 tokenLogin().then(res => {
   store.commit('setUser', res)
-  console.log(router.toString())
-  if (router.currentRoute.path === '/login') { // 应该有一个token白名单，没有token才能访问
-    router.push('/')
-  }
 })
 
 Vue.use(markdown)
