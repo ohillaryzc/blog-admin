@@ -54,6 +54,28 @@ const syncRoutesMap = [
       }
     ],
     redirect: '/article/list'
+  },
+  {
+    path: '/setup',
+    name: 'setup',
+    component: Layout,
+    meta: {
+      title: '个人设置',
+      icon: 'md-aperture',
+      keepAlive: true
+    },
+    children: [
+      {
+        path: 'about',
+        name: 'about',
+        component: () => import('../views/setup/about'),
+        meta: {
+          title: '信息设置',
+          keepAlive: true
+        }
+      }
+    ],
+    redirect: '/setup/about'
   }
 ]
 

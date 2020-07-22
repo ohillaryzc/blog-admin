@@ -64,3 +64,12 @@ export function publishArticle (params) {
     params
   })
 }
+
+/**
+ * 获取about信息
+ * */
+export function getAbout () {
+  return myPost({
+    url: '/get/about'
+  })
+}
