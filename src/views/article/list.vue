@@ -94,7 +94,7 @@ export default {
       classify: null,
       tags: null,
       page: {
-        pageSize: 20,
+        pageSize: 12,
         currentPage: 1,
         total: 0
       },

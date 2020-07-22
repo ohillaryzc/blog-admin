@@ -8,7 +8,10 @@ export default new Vuex.Store({
     user: {},
     isCollapsed: false,
     menus: [],
-    titles: []
+    titles: [],
+    tabsPath: [],
+    tabs: [],
+    activeTab: 0
   },
   mutations: {
     setUser (state, user) {
@@ -22,6 +25,23 @@ export default new Vuex.Store({
     },
     setTitles (state, titles) {
       state.titles = titles
+    },
+    keepRouter (state, to) {
+      const index = state.tabsPath.indexOf(to.path)
+      if (index > -1) {
+        state.activeTab = index
+      } else {
+        state.tabsPath.push(to.path)
+        state.tabs.push({ path: to.path, title: to.meta.title })
+        state.activeTab = state.tabs.length - 1
+      }
+    },
+    closeWin (state, index) {
+      state.tabs.splice(index, 1)
+      state.tabsPath.splice(index, 1)
+      if (index < state.activeTab) {
+        state.activeTab = --state.activeTab
+      }
     }
   },
   actions: {

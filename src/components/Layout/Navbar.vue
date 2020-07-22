@@ -15,7 +15,7 @@
       <Poptip placement="bottom" width="150" trigger="hover" v-model="showUserMenu">
         <div class="user-box">
           <Avatar icon="ios-person"/>
-          <span>{{ user.name }}</span>
+          <span class="username">{{ user.name }}</span>
         </div>
         <div slot="content" @click="showUserMenu = false">
           菜单
@@ -85,5 +85,8 @@ export default {
   }
   .top-item.right-util {
     float: right;
+  }
+  .username {
+    margin-left: 10px;
   }
 </style>

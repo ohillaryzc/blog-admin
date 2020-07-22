@@ -3,7 +3,11 @@
     <Sidebar></Sidebar>
     <Navbar></Navbar>
     <div class="router-content" :class="{'collapsed-content': isCollapsed}">
-      <router-view/>
+      <win-tab></win-tab>
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive"/>
+      </keep-alive>
+      <router-view v-if="!$route.meta.keepAlive"/>
     </div>
   </div>
 </template>
@@ -12,6 +16,7 @@
 import { mapState } from 'vuex'
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
+import WinTab from './WinTab'
 export default {
   name: "Layout",
   data () {
@@ -24,7 +29,8 @@ export default {
   ]),
   components: {
     Sidebar,
-    Navbar
+    Navbar,
+    WinTab
   }
 }
 </script>

@@ -10,12 +10,18 @@ const syncRoutesMap = [
     path: '/login',
     name: 'login',
     hidden: true,
+    meta: {
+      keepAlive: false
+    },
     component: () => import('../views/login')
   },
   {
     path: '',
     name: 'Layout',
     hidden: 'true',
+    meta: {
+      keepAlive: true
+    },
     component: Layout
   },
   {
@@ -24,7 +30,8 @@ const syncRoutesMap = [
     component: Layout,
     meta: {
       title: '文章管理',
-      icon: 'ios-paper'
+      icon: 'ios-paper',
+      keepAlive: true
     },
     children: [
       {
@@ -32,7 +39,8 @@ const syncRoutesMap = [
         name: 'article-list',
         component: () => import('../views/article/list'),
         meta: {
-          title: '文章列表'
+          title: '文章列表',
+          keepAlive: true
         }
       },
       {
@@ -40,7 +48,8 @@ const syncRoutesMap = [
         name: 'article-add',
         component: () => import('../views/article/add'),
         meta: {
-          title: '编辑文章'
+          title: '编辑文章',
+          keepAlive: true
         }
       }
     ],

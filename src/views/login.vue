@@ -6,9 +6,10 @@
         <p>iView-admin后台模板实践</p>
       </div>
       <div class="form-box">
-        <Form :model="visitorForm" :label-width="0" v-if="isVisitor">
+        <!-- form只有一个输入框时回车会默认提交 -->
+        <Form :model="visitorForm" :label-width="0" v-if="isVisitor" @submit.native.prevent>
           <FormItem prop="password">
-            <Input type="password" v-model="visitorForm.password" size="large" prefix="md-lock" placeholder="请输入游客码"/>
+            <Input type="password" v-model="visitorForm.password" @on-enter="toLogin" size="large" prefix="md-lock" placeholder="请输入游客码"/>
           </FormItem>
         </Form>
         <Form :model="loginForm" :label-width="0" v-else>
@@ -42,6 +43,7 @@
 
 <script>
 import { visitorLogin } from '../api'
+import { mapState } from 'vuex'
 export default {
   name: "login",
   data () {
@@ -58,6 +60,9 @@ export default {
       loading: false
     }
   },
+  computed: mapState([
+    'user'
+  ]),
   methods: {
     toLogin () {
       this.loading = true
@@ -78,6 +83,9 @@ export default {
     toAdminLogin () {}
   },
   created () {
+    if (this.user.id) {
+      this.$router.push('/')
+    }
   }
 }
 </script>

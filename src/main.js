@@ -20,13 +20,11 @@ Object.keys(iViewComponents).forEach(key => {
 const menus = getRouterMap(syncRoutesMap)
 store.commit('setMenus', menus)
 router.beforeEach((to, from, next) => {
-  // if (store.user) {
-  //
-  // }
   const titles = [
     to.matched[0].meta.title,
     to.meta.title
   ]
+  store.commit('keepRouter', to)
   store.commit('setTitles', titles)
   next()
 })
