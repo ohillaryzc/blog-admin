@@ -28,12 +28,14 @@ export default new Vuex.Store({
     },
     keepRouter (state, to) {
       const index = state.tabsPath.indexOf(to.path)
-      if (index > -1) {
-        state.activeTab = index
-      } else {
-        state.tabsPath.push(to.path)
-        state.tabs.push({ path: to.path, title: to.meta.title })
-        state.activeTab = state.tabs.length - 1
+      if (to.meta.title) {
+        if (index > -1) {
+          state.activeTab = index
+        } else {
+          state.tabsPath.push(to.path)
+          state.tabs.push({ path: to.path, title: to.meta.title })
+          state.activeTab = state.tabs.length - 1
+        }
       }
     },
     closeWin (state, index) {

@@ -73,3 +73,25 @@ export function getAbout () {
     url: '/get/about'
   })
 }
+
+/**
+ * 拉取线上文章
+ * @param {Object} params
+ * */
+export function catchArticle (params) {
+  return myPost({
+    url: '/get/juejin/article',
+    params
+  })
+}
+
+/**
+ * 保存线上文章
+ * @param {Object} params
+ * */
+export function saveCatchArticle (params) {
+  return myPost({
+    url: '/save/juejin/article',
+    params
+  })
+}

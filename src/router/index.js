@@ -51,6 +51,15 @@ const syncRoutesMap = [
           title: '编辑文章',
           keepAlive: true
         }
+      },
+      {
+        name: 'catch',
+        path: 'catch',
+        component: () => import('../views/article/catch'),
+        meta: {
+          title: '文章拉取',
+          keepAlive: true
+        }
       }
     ],
     redirect: '/article/list'
