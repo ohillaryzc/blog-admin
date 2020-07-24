@@ -6,6 +6,7 @@ import store from './store'
 import { getRouterMap } from './utils'
 import markdown from 'mavon-editor'
 import { Button, Icon, Menu, Submenu, MenuItem, Poptip, Breadcrumb, BreadcrumbItem, Form, FormItem, Input, Select, Option, DatePicker, Checkbox, Table, Tag, Page, Dropdown, DropdownItem, DropdownMenu, Upload, Avatar } from 'view-design'
+import search from './components/search'
 import 'view-design/dist/styles/iview.css'
 import './assets/css/cover.css'
 import 'mavon-editor/dist/css/index.css'
@@ -15,6 +16,7 @@ const iViewComponents = { Button, Icon, Menu, Submenu, MenuItem, Poptip, Breadcr
 Object.keys(iViewComponents).forEach(key => {
   Vue.component(key, iViewComponents[key])
 })
+Vue.component('search', search)
 
 // 生成路由表
 const menus = getRouterMap(syncRoutesMap)

@@ -85,6 +85,27 @@ const syncRoutesMap = [
       }
     ],
     redirect: '/setup/about'
+  },
+  {
+    name: 'timeline',
+    path: '/timeline',
+    component: Layout,
+    meta: {
+      title: '时间线',
+      icon: 'md-clock',
+      keepAlive: true
+    },
+    children: [
+      {
+        name: 'todo',
+        path: 'todo',
+        component: () => import('../views/timeline/todo'),
+        meta: {
+          title: '待办(todo-list)',
+          keepAlive: true
+        }
+      }
+    ]
   }
 ]
 

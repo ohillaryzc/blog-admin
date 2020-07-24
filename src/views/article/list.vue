@@ -43,12 +43,8 @@
 <script>
 import { getArticleList, getClassify, getTags } from '../../api'
 import { getKeyArray } from '../../utils'
-import search from '../../components/search'
 export default {
   name: "list",
-  components: {
-    search
-  },
   data () {
     return {
       col: [
