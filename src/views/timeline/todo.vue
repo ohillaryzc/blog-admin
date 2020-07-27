@@ -3,8 +3,33 @@
 </template>
 
 <script>
+import { getTodoList } from '../../api'
 export default {
-  name: "todo"
+  name: "todo",
+  data () {
+    return {
+      list: [],
+      page: {
+        currentPage: 1,
+        pageSize: 10,
+        total: 0
+      }
+    }
+  },
+  methods: {
+    updatePage () {
+      const params = {
+        pageNum: this.page.currentPage,
+        pageSize: this.page.pageSize
+      }
+      getTodoList(params).then(res => {
+        console.log(res)
+      })
+    }
+  },
+  mounted() {
+    this.updatePage()
+  }
 }
 </script>
 
