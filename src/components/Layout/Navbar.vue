@@ -4,6 +4,9 @@
       <Icon type="md-reorder" size="24" class="collapsed-icon"/>
     </div>
     <div class="top-item left-util">
+      <Icon type="md-refresh" size="22" @click="update" :class="{'spin-loading': requestLoading}"/>
+    </div>
+    <div class="top-item left-util">
       <Breadcrumb>
         <BreadcrumbItem to="/">首页</BreadcrumbItem>
         <template v-for="(item, index) in titles">
@@ -37,11 +40,15 @@ export default {
   computed: mapState([
     'isCollapsed',
     'titles',
-    'user'
+    'user',
+    'requestLoading'
   ]),
   methods: {
     collapsedSide () {
       this.$store.commit('setCollapsed')
+    },
+    update () {
+      this.$parent.$refs.page.updatePage()
     }
   }
 }
@@ -88,5 +95,16 @@ export default {
   }
   .username {
     margin-left: 10px;
+  }
+  @keyframes spinLoading {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .spin-loading {
+    animation: spinLoading .5s linear infinite;
   }
 </style>

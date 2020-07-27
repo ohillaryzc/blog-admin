@@ -11,7 +11,8 @@ export default new Vuex.Store({
     titles: [],
     tabsPath: [],
     tabs: [],
-    activeTab: 0
+    activeTab: 0,
+    requestLoading: false
   },
   mutations: {
     setUser (state, user) {
@@ -44,6 +45,9 @@ export default new Vuex.Store({
       if (index < state.activeTab) {
         state.activeTab = --state.activeTab
       }
+    },
+    setLoading (state, loading) {
+      state.requestLoading = loading
     }
   },
   actions: {

@@ -5,7 +5,7 @@
     <div class="router-content" :class="{'collapsed-content': isCollapsed}">
       <win-tab></win-tab>
       <keep-alive>
-        <router-view v-if="$route.meta.keepAlive"/>
+        <router-view v-if="$route.meta.keepAlive" ref="page"/>
       </keep-alive>
       <router-view v-if="!$route.meta.keepAlive"/>
     </div>
