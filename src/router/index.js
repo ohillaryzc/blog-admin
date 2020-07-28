@@ -106,6 +106,28 @@ const syncRoutesMap = [
         }
       }
     ]
+  },
+  {
+    name: 'user',
+    path: '/user',
+    component: Layout,
+    meta: {
+      title: '账号管理',
+      icon: 'md-contact',
+      keepAlive: true,
+      role: ['super']
+    },
+    children: [
+      {
+        name: 'userList',
+        path: 'list',
+        component: () => import('../views/user'),
+        meta: {
+          title: '账号列表',
+          keepAlive: true
+        }
+      }
+    ]
   }
 ]
 

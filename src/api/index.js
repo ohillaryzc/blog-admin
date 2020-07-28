@@ -106,3 +106,14 @@ export function getTodoList (params) {
     params
   })
 }
+
+/**
+ * 添加账号
+ * @param {Object} params
+ * */
+export function addAccount (params) {
+  return myPost({
+    url: '/add/login',
+    params
+  })
+}

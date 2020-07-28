@@ -48,7 +48,14 @@ export default {
       this.$store.commit('setCollapsed')
     },
     update () {
-      this.$parent.$refs.page.updatePage()
+      if (this.$parent.$refs.page.updatePage) {
+        this.$parent.$refs.page.updatePage()
+      } else {
+        this.$store.commit('setLoading', true)
+        setTimeout(() => {
+          this.$store.commit('setLoading', false)
+        }, 1500)
+      }
     }
   }
 }

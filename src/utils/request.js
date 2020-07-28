@@ -12,7 +12,7 @@ export function myPost ({ url, params }) {
     const start = new Date().valueOf()
     axios.post(url, params)
       .then(res => {
-        if (res.data.status === 0 || !res.data.error) {
+        if (res.data.status === 0) {
           LoadingBar.finish()
           resolve(res.data.data)
         } else {
