@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import { syncRoutesMap } from './router'
+import { syncRoutesMap, asyncRoutesMap } from './router'
 import store from './store'
 import { getRouterMap } from './utils'
 import markdown from 'mavon-editor'
@@ -44,24 +44,44 @@ Object.keys(iViewComponents).forEach(key => {
 Vue.component('search', search)
 Vue.prototype.$Message = Message
 
-// 生成路由表
+// 生成路由表 permission
 const menus = getRouterMap(syncRoutesMap)
 store.commit('setMenus', menus)
 router.beforeEach((to, from, next) => {
-  const titles = [
-    to.matched[0].meta.title,
-    to.meta.title
-  ]
-  store.commit('keepRouter', to)
-  store.commit('setTitles', titles)
-  next()
-})
-
-// 获取用户信息，保存在vuex
-tokenLogin().then(res => {
-  store.commit('setUser', res)
-}, () => {
-  router.push('/login')
+  if (!store.state.user.id) {
+    // 获取用户信息，保存在vuex
+    tokenLogin().then(res => {
+      store.commit('setUser', res)
+      const asyncMap = []
+      asyncRoutesMap.forEach(item => {
+        if (item.meta.role.indexOf(res.role) > -1) {
+          asyncMap.push(item)
+        }
+      })
+      router.addRoutes(asyncMap)
+      const asyncMenus = getRouterMap(asyncMap)
+      store.commit('setMenus', store.state.menus.concat(asyncMenus))
+      next({ ...to })
+    }, () => {
+      if (to.path === '/login') {
+        next()
+      } else {
+        next({ path: '/login' })
+      }
+    })
+  } else {
+    if (to.meta.role && to.meta.role.indexOf(store.state.user.role) === -1) {
+      next({ path: '/intercept/403' })
+    } else {
+      const titles = [
+        to.matched[0].meta.title,
+        to.meta.title
+      ]
+      store.commit('keepRouter', to)
+      store.commit('setTitles', titles)
+      next()
+    }
+  }
 })
 
 Vue.use(markdown)

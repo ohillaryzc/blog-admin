@@ -1,17 +1,20 @@
 /* 工具方法 */
 /**
  * @param {Array} arr 一个router结构的数组
+ * @param {String} [role]
  * @returns {Array}
  * */
-export function getRouterMap (arr) {
+export function getRouterMap (arr, role) {
   const result = []
   arr.forEach(item => {
     if (!item.hidden) {
       let children = []
       if (item.children) {
-        children = getRouterMap(item.children)
+        children = getRouterMap(item.children, role)
       }
-      result.push({ path: item.path, meta: item.meta, children })
+      if (!item.meta.role || item.meta.role.indexOf(role) > -1) {
+        result.push({ path: item.path, meta: item.meta, children })
+      }
     }
   })
   return result

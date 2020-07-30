@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { ADMIN } from '../role.config'
 import Layout from '../components/Layout/Layout'
 
 Vue.use(VueRouter)
@@ -49,7 +50,8 @@ const syncRoutesMap = [
         component: () => import('../views/article/add'),
         meta: {
           title: '编辑文章',
-          keepAlive: true
+          keepAlive: true,
+          role: [ADMIN]
         }
       },
       {
@@ -63,28 +65,6 @@ const syncRoutesMap = [
       }
     ],
     redirect: '/article/list'
-  },
-  {
-    path: '/setup',
-    name: 'setup',
-    component: Layout,
-    meta: {
-      title: '个人设置',
-      icon: 'md-aperture',
-      keepAlive: true
-    },
-    children: [
-      {
-        path: 'about',
-        name: 'about',
-        component: () => import('../views/setup/about'),
-        meta: {
-          title: '信息设置',
-          keepAlive: true
-        }
-      }
-    ],
-    redirect: '/setup/about'
   },
   {
     name: 'timeline',
@@ -102,10 +82,47 @@ const syncRoutesMap = [
         component: () => import('../views/timeline/todo'),
         meta: {
           title: '待办(todo-list)',
-          keepAlive: true
+          keepAlive: true,
+          role: [ADMIN]
         }
       }
     ]
+  },
+  {
+    name: 'intercept',
+    path: '/intercept/:code',
+    hidden: true,
+    meta: {
+      keepAlive: false
+    },
+    component: () => import('../views/error/intercept')
+  }
+]
+
+// 异步路由
+const asyncRoutesMap = [
+  {
+    path: '/setup',
+    name: 'setup',
+    component: Layout,
+    meta: {
+      title: '个人设置',
+      icon: 'md-aperture',
+      keepAlive: true,
+      role: [ADMIN]
+    },
+    children: [
+      {
+        path: 'about',
+        name: 'about',
+        component: () => import('../views/setup/about'),
+        meta: {
+          title: '信息设置',
+          keepAlive: true
+        }
+      }
+    ],
+    redirect: '/setup/about'
   },
   {
     name: 'user',
@@ -115,7 +132,7 @@ const syncRoutesMap = [
       title: '账号管理',
       icon: 'md-contact',
       keepAlive: true,
-      role: ['super']
+      role: [ADMIN]
     },
     children: [
       {
@@ -130,9 +147,6 @@ const syncRoutesMap = [
     ]
   }
 ]
-
-// 异步路由
-const asyncRoutesMap = []
 
 const router = new VueRouter({
   mode: 'history',
