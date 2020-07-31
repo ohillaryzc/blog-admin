@@ -13,6 +13,15 @@ export function visitorLogin (params) {
 }
 
 /**
+ * 退出登录
+ * */
+export function logout () {
+  return myPost({
+    url: '/logout'
+  })
+}
+
+/**
  * 通过token判断有没有过期
  * */
 export function tokenLogin () {

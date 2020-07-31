@@ -21,7 +21,9 @@
           <span class="username">{{ user.name }}</span>
         </div>
         <div slot="content" @click="showUserMenu = false">
-          菜单
+          <div class="down-menu-item">个人中心</div>
+          <div class="down-menu-item">设置</div>
+          <div class="down-menu-item" @click="toLogout">退出登录</div>
         </div>
       </Poptip>
     </div>
@@ -30,6 +32,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import { logout } from '../../api'
 export default {
   name: "Navbar",
   data () {
@@ -48,7 +51,7 @@ export default {
       this.$store.commit('setCollapsed')
     },
     update () {
-      if (this.$parent.$refs.page.updatePage) {
+      if (this.$parent.$refs.page && this.$parent.$refs.page.updatePage) {
         this.$parent.$refs.page.updatePage()
       } else {
         this.$store.commit('setLoading', true)
@@ -56,6 +59,12 @@ export default {
           this.$store.commit('setLoading', false)
         }, 1500)
       }
+    },
+    toLogout () {
+      logout().then(() => {
+        this.$store.commit('setUser', {})
+        this.$router.push('/login')
+      })
     }
   }
 }
@@ -113,5 +122,8 @@ export default {
   }
   .spin-loading {
     animation: spinLoading .5s linear infinite;
+  }
+  .down-menu-item {
+    line-height: 34px;
   }
 </style>

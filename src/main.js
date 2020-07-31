@@ -43,18 +43,19 @@ Object.keys(iViewComponents).forEach(key => {
 })
 Vue.component('search', search)
 Vue.prototype.$Message = Message
+const whiteList = ['/login']
 
 // 生成路由表 permission
 const menus = getRouterMap(syncRoutesMap)
 store.commit('setMenus', menus)
 router.beforeEach((to, from, next) => {
-  if (!store.state.user.id) {
+  if (!store.state.user.id && !whiteList.includes(to.path)) {
     // 获取用户信息，保存在vuex
     tokenLogin().then(res => {
       store.commit('setUser', res)
       const asyncMap = []
       asyncRoutesMap.forEach(item => {
-        if (item.meta.role.indexOf(res.role) > -1) {
+        if (item.meta.role.includes(res.role)) {
           asyncMap.push(item)
         }
       })
@@ -70,7 +71,7 @@ router.beforeEach((to, from, next) => {
       }
     })
   } else {
-    if (to.meta.role && to.meta.role.indexOf(store.state.user.role) === -1) {
+    if (to.meta.role && !to.meta.role.includes(store.state.user.role)) {
       next({ path: '/intercept/403' })
     } else {
       const titles = [

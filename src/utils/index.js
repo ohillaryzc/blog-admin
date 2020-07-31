@@ -12,7 +12,7 @@ export function getRouterMap (arr, role) {
       if (item.children) {
         children = getRouterMap(item.children, role)
       }
-      if (!item.meta.role || item.meta.role.indexOf(role) > -1) {
+      if (!item.meta.role || item.meta.role.includes(role)) {
         result.push({ path: item.path, meta: item.meta, children })
       }
     }
