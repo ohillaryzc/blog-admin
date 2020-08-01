@@ -45,9 +45,6 @@ Vue.component('search', search)
 Vue.prototype.$Message = Message
 const whiteList = ['/login']
 
-// 生成路由表 permission
-const menus = getRouterMap(syncRoutesMap)
-store.commit('setMenus', menus)
 router.beforeEach((to, from, next) => {
   if (!store.state.user.id && !whiteList.includes(to.path)) {
     // 获取用户信息，保存在vuex
@@ -60,8 +57,9 @@ router.beforeEach((to, from, next) => {
         }
       })
       router.addRoutes(asyncMap)
-      const asyncMenus = getRouterMap(asyncMap, res.role)
-      store.commit('setMenus', store.state.menus.concat(asyncMenus))
+      // 生成路由表 permission
+      const menus = getRouterMap(syncRoutesMap.concat(asyncMap), res.role)
+      store.commit('setMenus', menus)
       next({ ...to })
     }, () => {
       if (to.path === '/login') {
