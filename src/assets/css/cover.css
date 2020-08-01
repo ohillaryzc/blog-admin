@@ -130,3 +130,9 @@
     display: none;
 }
 /* 侧边栏样式重组end */
+
+/* 文章拉取img start */
+.article-content img {
+    width: 100%;
+}
+/* 文章拉取img end */

@@ -60,7 +60,7 @@ router.beforeEach((to, from, next) => {
         }
       })
       router.addRoutes(asyncMap)
-      const asyncMenus = getRouterMap(asyncMap)
+      const asyncMenus = getRouterMap(asyncMap, res.role)
       store.commit('setMenus', store.state.menus.concat(asyncMenus))
       next({ ...to })
     }, () => {
