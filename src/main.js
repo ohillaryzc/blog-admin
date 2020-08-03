@@ -29,7 +29,8 @@ import {
   Upload,
   Avatar,
   Modal,
-  Message
+  Message,
+  Badge
 } from 'view-design'
 import search from './components/search'
 import 'view-design/dist/styles/iview.css'
@@ -37,7 +38,7 @@ import './assets/css/cover.css'
 import 'mavon-editor/dist/css/index.css'
 import { tokenLogin } from './api'
 
-const iViewComponents = { Button, Modal, Message, Icon, Menu, Submenu, MenuItem, Poptip, Breadcrumb, BreadcrumbItem, Form, FormItem, Input, Select, Option, DatePicker, Checkbox, Table, Tag, Page, Dropdown, DropdownItem, DropdownMenu, Upload, Avatar }
+const iViewComponents = { Button, Modal, Badge, Message, Icon, Menu, Submenu, MenuItem, Poptip, Breadcrumb, BreadcrumbItem, Form, FormItem, Input, Select, Option, DatePicker, Checkbox, Table, Tag, Page, Dropdown, DropdownItem, DropdownMenu, Upload, Avatar }
 Object.keys(iViewComponents).forEach(key => {
   Vue.component(key, iViewComponents[key])
 })
