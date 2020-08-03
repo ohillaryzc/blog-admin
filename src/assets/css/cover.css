@@ -102,6 +102,11 @@
 .ivu-menu-dark.ivu-menu-vertical .ivu-menu-item, .ivu-menu-dark.ivu-menu-vertical .ivu-menu-submenu-title {
     white-space: nowrap;
 }
+.desktop-menu.ivu-menu-item.ivu-menu-item-active.ivu-menu-item-selected {
+    border-right: none;
+    color: #fff;
+    background: #2d8cf0!important;
+}
 .ivu-table th {
     background-color: #fff;
 }

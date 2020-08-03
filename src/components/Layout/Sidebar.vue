@@ -2,6 +2,10 @@
   <div class="sidebar" :class="{'collapsed-sidebar': isCollapsed}">
     <div class="logo-box">{{ isCollapsed ? 'admin' : 'blog-admin' }}</div>
     <Menu theme="dark" accordion :active-name="$route.path" width="auto" :class="{'collapsed-menu': isCollapsed}">
+      <MenuItem name="/desktop" to="/desktop" class="desktop-menu">
+        <Icon type="md-menu"/>
+        <span class="menu-title">工作台</span>
+      </MenuItem>
       <Submenu v-for="(item, index) in menus" :key="index" :name="item.path">
         <template slot="title" v-if="isCollapsed">
           <Poptip trigger="hover" placement="right" popper-class="collapsed-popper" padding="8px 0">
