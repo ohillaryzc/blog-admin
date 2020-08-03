@@ -73,9 +73,11 @@ export default {
       }
     },
     toVisitorLogin () {
-      visitorLogin(this.visitorForm).then(data => {
-        this.$store.commit('setUser', data)
-        this.$router.push('/')
+      visitorLogin(this.visitorForm).then(() => {
+        // this.$store.commit('setUser', data)
+        // this.$router.push('/')
+        // 刷新界面跳转
+        window.location.href = '/'
       }, () => {
         this.loading = false
       })

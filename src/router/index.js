@@ -17,13 +17,26 @@ const syncRoutesMap = [
     component: () => import('../views/login')
   },
   {
-    path: '',
+    path: '/',
     name: 'Layout',
     hidden: 'true',
     meta: {
       keepAlive: true
     },
-    component: Layout
+    component: Layout,
+    children: [
+      {
+        path: 'desktop',
+        name: 'desktop',
+        meta: {
+          title: '工作台',
+          icon: '',
+          keepAlive: true
+        },
+        component: () => import('../views/desktop')
+      }
+    ],
+    redirect: '/desktop'
   },
   {
     path: '/article',

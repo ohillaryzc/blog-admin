@@ -63,7 +63,9 @@ export default {
     toLogout () {
       logout().then(() => {
         this.$store.commit('setUser', {})
-        this.$router.push('/login')
+        // this.$router.push('/login')
+        // 刷新页面跳转
+        window.location.href = '/login'
       })
     }
   }
