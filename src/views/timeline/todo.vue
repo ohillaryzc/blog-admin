@@ -1,6 +1,6 @@
 <template>
   <div class="todo-page content-page">
-    <Table :columns="column" :data="list">
+    <Table :columns="column" :data="list" disabled-hover>
       <template slot="content" slot-scope="{ row }">
         <span>{{ `#${row.id}：${row.content}` }}</span>
       </template>
@@ -14,10 +14,10 @@
         <span>{{ row.type }}</span>
       </template>
       <template slot="status" slot-scope="{ row }">
-        <span>{{ row.status }}</span>
+        <Badge :color="status[row.status].color" :text="status[row.status].label"/>
       </template>
       <template slot="action" slot-scope="{ row }">
-        <span>{{ row.end }}</span>
+        <Button type="text" @click="doAction(row)">操作</Button>
       </template>
     </Table>
   </div>
@@ -30,6 +30,11 @@ export default {
   data () {
     return {
       list: [],
+      status: [
+        { label: '进行中', color: 'blue' },
+        { label: '已完成', color: '#808695' },
+        { label: '未开始', color: 'yellow' }
+      ],
       page: {
         currentPage: 1,
         pageSize: 10,
@@ -76,6 +81,9 @@ export default {
       getTodoList(params).then(res => {
         this.list = res
       })
+    },
+    doAction (row) {
+      console.log(row)
     }
   },
   mounted() {
