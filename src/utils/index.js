@@ -9,11 +9,17 @@ export function getRouterMap (arr, role) {
   arr.forEach(item => {
     if (!item.hidden) {
       let children = []
-      if (item.children) {
-        children = getRouterMap(item.children, role)
-      }
       if (!item.meta.role || item.meta.role.includes(role)) {
-        result.push({ path: item.path, meta: item.meta, children })
+        if (item.children) {
+          // 一级菜单
+          children = getRouterMap(item.children, role)
+          if (children.length) { // 一级菜单下面有子菜单才会显示(children.length > 0)
+            result.push({ path: item.path, meta: item.meta, children })
+          }
+        } else {
+          // 二级菜单
+          result.push({ path: item.path, meta: item.meta })
+        }
       }
     }
   })

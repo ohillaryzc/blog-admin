@@ -5,7 +5,7 @@
       v-for="(item, index) in tabs"
       :key="index">
       <router-link :to="item.path">{{ item.title }}</router-link>
-      <Icon type="md-close" size="14" @click="closeTab(index)" v-if="tabs.length > 1"></Icon>
+      <Icon type="md-close" size="14" @click="closeTab(index)" v-if="tabs.length > 1 && index !== 0"></Icon>
     </div>
   </div>
 </template>

@@ -9,8 +9,10 @@ export default new Vuex.Store({
     isCollapsed: false,
     menus: [],
     titles: [],
-    tabsPath: [],
-    tabs: [],
+    tabsPath: ['/desktop'],
+    tabs: [
+      {title: '工作台', path: '/desktop'},
+    ],
     activeTab: 0,
     requestLoading: false
   },

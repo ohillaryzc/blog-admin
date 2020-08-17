@@ -61,6 +61,7 @@ router.beforeEach((to, from, next) => {
       router.addRoutes(asyncMap)
       // 生成路由表 permission
       const menus = getRouterMap(syncRoutesMap.concat(asyncMap), res.role)
+      console.log(menus)
       store.commit('setMenus', menus)
       next({ ...to })
     }, () => {
