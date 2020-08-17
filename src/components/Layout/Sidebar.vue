@@ -2,9 +2,9 @@
   <div class="sidebar" :class="{'collapsed-sidebar': isCollapsed}">
     <div class="logo-box">{{ isCollapsed ? 'admin' : 'blog-admin' }}</div>
     <Menu theme="dark" accordion :active-name="$route.path" width="auto" :class="{'collapsed-menu': isCollapsed}">
-      <MenuItem name="/desktop" to="/desktop" class="desktop-menu">
+      <MenuItem name="/desktop" to="/desktop" :class="['desktop-menu', isCollapsed ? 'desktop-menu-collapsed' : '']">
         <Icon type="md-menu"/>
-        <span class="menu-title">工作台</span>
+        <span class="menu-title" v-if="!isCollapsed">工作台</span>
       </MenuItem>
       <Submenu v-for="(item, index) in menus" :key="index" :name="item.path">
         <template slot="title" v-if="isCollapsed">
@@ -71,6 +71,19 @@ export default {
     display: inline-block;
     white-space: nowrap;
     transition: width .3s ease-in-out;
+  }
+  .desktop-menu {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    width: 100%;
+    height: 60px;
+  }
+  .desktop-menu-collapsed {
+    justify-content: center;
+  }
+  .desktop-menu-collapsed i {
+    margin: 0;
   }
   .collapsed-icon {
     width: 78px;
